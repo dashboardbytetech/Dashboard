@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Looker Studio Dashboard</title>
+  </head>
+  <body>
+    <h1>BU Factory| Bản tin giải trí (chữa rối loạn lo âu deadline)</h1>
+
+    <!-- Embed Looker Studio Dashboard -->
+    <iframe
+      id="looker-studio-iframe"
+      width="90%"
+      height="900"
+      src="https://lookerstudio.google.com/embed/reporting/96084f0b-b4ea-467e-8f7a-0b271cb0468d/page/7dpIE"
+      frameborder="0"
+      style="border: 0"
+      allowfullscreen
+      sandbox="allow-scripts allow-same-origin allow-popups"
+    ></iframe>
+
+    <script>
+      // Array of URLs for the slideshow
+      const urls = [
+        "https://lookerstudio.google.com/embed/reporting/96084f0b-b4ea-467e-8f7a-0b271cb0468d/page/7dpIE",
+        "https://lookerstudio.google.com/embed/u/0/reporting/352dc31b-9815-4756-9c7c-25788d131b67/page/p_2ecwruk9jd",
+        // Add as many URLs as needed
+      ];
+
+      let currentIndex = 0; // Start with the first URL
+
+      // Function to load the next URL in the iframe
+      function loadNextUrl() {
+        const iframe = document.getElementById("looker-studio-iframe");
+        iframe.src = urls[currentIndex]; // Update iframe src to the next URL
+        currentIndex = (currentIndex + 1) % urls.length; // Move to next URL, loop back to start
+      }
+
+      // Slideshow: Switch URLs every 3 minutes (180,000 ms)
+      setInterval(loadNextUrl, 300000); // 60000 milliseconds = 1 minutes
+
+      // Data Refresh: Reload the iframe every 5 minutes (300,000 ms) to refresh data
+      setInterval(function() {
+        const iframe = document.getElementById("looker-studio-iframe");
+        iframe.src = iframe.src; // Reload the iframe to refresh the data
+      }, 300000); // 300,000 milliseconds = 5 minutes
+
+      // Initial load of the first URL
+      loadNextUrl();
+    </script>
+  </body>
+</html>
